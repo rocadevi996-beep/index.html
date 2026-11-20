@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRADUANDO | Generador de Temas y Anteproyectos de Tesis</title>
+    <title>GRADUANDO | Expertos en Investigación y Asesoría Académica</title>
     <style>
         :root {
             --primary: #0f4c81;
@@ -30,28 +30,85 @@
         header {
             background: linear-gradient(135deg, var(--primary), #163a5f);
             color: var(--white);
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             text-align: center;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             letter-spacing: 2px;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
         }
 
         header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
+            font-size: 1.05rem;
+            opacity: 0.95;
+            max-width: 720px;
             margin: 0 auto;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 920px;
             margin: 2rem auto;
             padding: 0 1rem;
+        }
+
+        /* Selector de Servicios (Pestañas) */
+        .services-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 1.8rem;
+        }
+
+        .service-tab {
+            background: var(--white);
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary);
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .service-tab:hover {
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .service-tab.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            box-shadow: 0 6px 12px rgba(15, 76, 129, 0.2);
+        }
+
+        .service-tab span {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card {
@@ -66,21 +123,21 @@
         h2 {
             color: var(--primary);
             margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            font-size: 1.45rem;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.3rem;
         }
 
         label {
             display: block;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.45rem;
             color: var(--text-dark);
         }
 
-        select, input[type="text"] {
+        select, input[type="text"], input[type="date"], textarea {
             width: 100%;
             padding: 0.85rem;
             border: 2px solid #e2e8f0;
@@ -89,7 +146,7 @@
             transition: border-color 0.3s;
         }
 
-        select:focus, input[type="text"]:focus {
+        select:focus, input:focus, textarea:focus {
             outline: none;
             border-color: var(--secondary);
         }
@@ -104,7 +161,7 @@
             color: var(--white);
             border: none;
             padding: 1rem 2rem;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
@@ -116,8 +173,25 @@
             background-color: #028090;
         }
 
-        .btn:active {
-            transform: scale(0.99);
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
         }
 
         #resultado-container {
@@ -135,7 +209,7 @@
 
         .propuesta-box h3 {
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .propuesta-item {
@@ -150,22 +224,6 @@
             text-align: center;
         }
 
-        .btn-whatsapp {
-            display: inline-block;
-            background-color: #25D366;
-            color: white;
-            text-decoration: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-top: 1rem;
-            transition: background 0.3s;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #128C7E;
-        }
-
         footer {
             text-align: center;
             padding: 2rem;
@@ -177,154 +235,308 @@
 <body>
 
     <header>
-        <h1>GRADUANDO</h1>
-        <p>Plataforma inteligente de generación de ideas de investigación y estructura de anteproyectos de grado</p>
+        <h1>🎓 GRADUANDO 📚</h1>
+        <p>¿Bloqueado con tu tesis? En GRADUANDO transformamos tus ideas en un proyecto de grado ganador. 🎓📚 Somos expertos en investigación académica. Encuentra tu tema ideal, estructura tu anteproyecto y recibe el respaldo metodológico que necesitas para graduarte sin estrés.</p>
     </header>
 
     <div class="container">
-        <div class="card">
-            <h2>1. Configura tu Perfil Académico</h2>
-            
-            <div class="form-group">
-                <label for="carrera">Selecciona tu Programa / Carrera:</label>
-                <select id="carrera">
-                    <option value="">-- Elige tu carrera --</option>
-                    
-                    <optgroup label="🩺 Ciencias de la Salud">
-                        <option value="Medicina">Medicina</option>
-                        <option value="Enfermería">Enfermería</option>
-                        <option value="Instrumentación Quirúrgica">Instrumentación Quirúrgica</option>
-                        <option value="Fisioterapia">Fisioterapia</option>
-                        <option value="Bacteriología y Laboratorio Clínico">Bacteriología y Laboratorio Clínico</option>
-                        <option value="Odontología">Odontología</option>
-                        <option value="Nutrición y Dietética">Nutrición y Dietética</option>
-                        <option value="Fonoaudiología">Fonoaudiología</option>
-                        <option value="Terapia Respiratoria">Terapia Respiratoria</option>
-                        <option value="Regencia de Farmacia">Regencia de Farmacia</option>
-                        <option value="Psicología Clínica y de la Salud">Psicología Clínica y de la Salud</option>
-                        <option value="Seguridad y Salud en el Trabajo (SST)">Seguridad y Salud en el Trabajo (SST)</option>
-                    </optgroup>
-
-                    <optgroup label="⚙️ Ingenierías y Tecnología">
-                        <option value="Ingeniería Civil">Ingeniería Civil</option>
-                        <option value="Ingeniería de Sistemas / Software">Ingeniería de Sistemas / Software</option>
-                        <option value="Ingeniería Industrial">Ingeniería Industrial</option>
-                        <option value="Ingeniería Ambiental">Ingeniería Ambiental</option>
-                    </optgroup>
-
-                    <optgroup label="⚖️ Ciencias Sociales, Jurídicas y Administrativas">
-                        <option value="Derecho">Derecho</option>
-                        <option value="Administración de Empresas">Administración de Empresas</option>
-                        <option value="Contaduría Pública">Contaduría Pública</option>
-                        <option value="Trabajo Social">Trabajo Social</option>
-                        <option value="Educación / Licenciaturas">Educación / Licenciaturas</option>
-                    </optgroup>
-                </select>
+        <!-- Menú de 4 Servicios -->
+        <div class="services-nav">
+            <div class="service-tab active" onclick="cambiarTab('tesis', this)">
+                <span>🎓</span>
+                Tesis y Proyectos
             </div>
-
-            <div class="form-group">
-                <label for="enfoque">Área de interés o población específica (Opcional):</label>
-                <input type="text" id="enfoque" placeholder="Ej. Quirófano, UCI, pacientes pediátricos, rehabilitación deportiva, gestión hospitalaria...">
+            <div class="service-tab" onclick="cambiarTab('trabajos', this)">
+                <span>📝</span>
+                Ensayos y Normas
             </div>
-
-            <div class="form-group">
-                <label for="tipo-estudio">Tipo de investigación preferida:</label>
-                <select id="tipo-estudio">
-                    <option value="Revisión Sistemática / Literatura">Revisión Sistemática o de Literatura (Sin trabajo de campo)</option>
-                    <option value="Estudio Observacional / Descriptivo">Estudio Observacional / Análisis de Bases de Datos</option>
-                    <option value="Estudio Cuantitativo / Correlacional">Estudio Cuantitativo / Encuestas</option>
-                    <option value="Estudio Cualitativo">Estudio Cualitativo / Entrevistas</option>
-                </select>
+            <div class="service-tab" onclick="cambiarTab('ciencias', this)">
+                <span>🧮</span>
+                Ciencias Básicas
             </div>
-
-            <button class="btn" onclick="generarAnteproyecto()">Generar Idea y Estructura de Anteproyecto</button>
-        </div>
-
-        <div class="card" id="resultado-container">
-            <h2>2. Propuesta Generada por GRADUANDO</h2>
-            <div id="contenido-propuesta"></div>
-
-            <div class="cta-box">
-                <h3>¿Necesitas desarrollar este anteproyecto completo con normas APA 7 o Vancouver?</h3>
-                <p>En <strong>GRADUANDO</strong> te acompañamos desde la búsqueda de antecedentes y matriz de datos hasta el documento final listo para sustentar.</p>
-                <a href="https://wa.me" target="_blank" class="btn-whatsapp">
-                    📲 Solicitar Asesoría Personalizada por WhatsApp
-                </a>
+            <div class="service-tab" onclick="cambiarTab('tutorias', this)">
+                <span>💻</span>
+                Tutorías Virtuales
             </div>
         </div>
-    </div>
+        <!-- PANEL 1: PROYECTOS DE GRADO Y TESIS -->
+        <div id="panel-tesis" class="tab-panel active">
+            <div class="card">
+                <h2>1. Configura tu Perfil de Investigación</h2>
+                
+                <div class="form-group">
+                    <label for="carrera">Selecciona tu Programa / Carrera:</label>
+                    <select id="carrera">
+                        <option value="">-- Elige tu carrera --</option>
+                        <optgroup label="🩺 Ciencias de la Salud">
+                            <option value="Medicina">Medicina</option>
+                            <option value="Enfermería">Enfermería</option>
+                            <option value="Instrumentación Quirúrgica">Instrumentación Quirúrgica</option>
+                            <option value="Fisioterapia">Fisioterapia</option>
+                            <option value="Bacteriología y Laboratorio Clínico">Bacteriología y Laboratorio Clínico</option>
+                            <option value="Odontología">Odontología</option>
+                            <option value="Nutrición y Dietética">Nutrición y Dietética</option>
+                            <option value="Fonoaudiología">Fonoaudiología</option>
+                            <option value="Terapia Respiratoria">Terapia Respiratoria</option>
+                            <option value="Regencia de Farmacia">Regencia de Farmacia</option>
+                            <option value="Psicología Clínica y de la Salud">Psicología Clínica y de la Salud</option>
+                            <option value="Seguridad y Salud en el Trabajo (SST)">Seguridad y Salud en el Trabajo (SST)</option>
+                        </optgroup>
+                        <optgroup label="⚙️ Ingenierías y Tecnología">
+                            <option value="Ingeniería Civil">Ingeniería Civil</option>
+                            <option value="Ingeniería de Sistemas / Software">Ingeniería de Sistemas / Software</option>
+                            <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                            <option value="Ingeniería Ambiental">Ingeniería Ambiental</option>
+                        </optgroup>
+                        <optgroup label="⚖️ Ciencias Sociales, Jurídicas y Administrativas">
+                            <option value="Derecho">Derecho</option>
+                            <option value="Administración de Empresas">Administración de Empresas</option>
+                            <option value="Contaduría Pública">Contaduría Pública</option>
+                            <option value="Trabajo Social">Trabajo Social</option>
+                            <option value="Educación / Licenciaturas">Educación / Licenciaturas</option>
+                        </optgroup>
+                    </select>
+                </div>
 
+                <div class="form-group">
+                    <label for="enfoque">Escribe el tema, patología o variable principal:</label>
+                    <input type="text" id="enfoque" placeholder="Ej. ACV, cirugía segura, diabetes, infección hospitalaria, rehabilitación, riesgo laboral...">
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo-estudio">Enfoque metodológico preferido:</label>
+                    <select id="tipo-estudio">
+                        <option value="Revisión Sistemática / Literatura">Revisión Sistemática o de Literatura (Sin trabajo de campo)</option>
+                        <option value="Estudio Observacional / Descriptivo">Estudio Observacional / Análisis de Bases de Datos</option>
+                        <option value="Estudio Cuantitativo / Correlacional">Estudio Cuantitativo / Encuestas</option>
+                        <option value="Estudio Cualitativo">Estudio Cualitativo / Fenomenológico</option>
+                    </select>
+                </div>
+
+                <button class="btn" onclick="generarPropuesta()">Generar Sugerencia de Título y Referentes</button>
+            </div>
+
+            <!-- Resultado Generado -->
+            <div class="card" id="resultado-container">
+                <h2>2. Propuesta de Investigación Sugerida</h2>
+                <div class="propuesta-box" id="propuesta-contenido"></div>
+                <div class="cta-box">
+                    <p><strong>¿Te gustó esta propuesta o necesitas que redactemos el planteamiento del problema, marco teórico y metodología?</strong></p>
+                    <a id="btn-wa-tesis" href="#" target="_blank" class="btn-whatsapp">📲 Solicitar Asesoría por WhatsApp</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 2: ENSAYOS, TRABAJOS CORTOS Y NORMAS -->
+        <div id="panel-trabajos" class="tab-panel">
+            <div class="card">
+                <h2>📝 Ensayos, Trabajos Académicos y Aplicación de Normas</h2>
+                <div class="form-group">
+                    <label for="tipo-trabajo">¿Qué tipo de trabajo necesitas?</label>
+                    <select id="tipo-trabajo">
+                        <option value="Ensayo Argumentativo / Crítico">Ensayo Argumentativo / Crítico</option>
+                        <option value="Corrección y Ajuste de Tesis">Corrección y Ajuste de Tesis / Anteproyecto</option>
+                        <option value="Aplicación de Normas (APA 7, IEEE, Vancouver, Icontec)">Aplicación de Normas (APA 7, IEEE, Vancouver, Icontec)</option>
+                        <option value="Resúmenes, Relatorías o Artículos">Resúmenes, Relatorías o Artículos</option>
+                        <option value="Diapositivas y Sustentación">Presentación en Diapositivas para Sustentación</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tema-trabajo">Materia o tema del trabajo:</label>
+                    <input type="text" id="tema-trabajo" placeholder="Ej. Ética médica, normas APA 7 a tesis de 60 páginas, ensayo sobre economía...">
+                </div>
+                <div class="form-group">
+                    <label for="detalle-trabajo">Detalles adicionales (extensión, normas, fecha de entrega):</label>
+                    <textarea id="detalle-trabajo" rows="3" placeholder="Indica número de páginas, norma exigida o fecha límite..."></textarea>
+                </div>
+                <button class="btn-whatsapp" onclick="enviarWhatsAppDirecto('trabajos')">📲 Cotizar Trabajo por WhatsApp</button>
+            </div>
+        </div>
+
+        <!-- PANEL 3: EJERCICIOS DE CIENCIAS BÁSICAS -->
+        <div id="panel-ciencias" class="tab-panel">
+            <div class="card">
+                <h2>🧮 Resolución de Ejercicios y Talleres de Ciencias Básicas</h2>
+                <div class="form-group">
+                    <label for="materia-ciencias">Selecciona la asignatura:</label>
+                    <select id="materia-ciencias">
+                        <option value="Cálculo Diferencial (Cálculo 1)">Cálculo Diferencial (Cálculo 1)</option>
+                        <option value="Cálculo Integral (Cálculo 2)">Cálculo Integral (Cálculo 2)</option>
+                        <option value="Cálculo Multivariado / Vectorial (Cálculo 3)">Cálculo Multivariado / Vectorial (Cálculo 3)</option>
+                        <option value="Ecuaciones Diferenciales Ordinarias (EDO)">Ecuaciones Diferenciales Ordinarias (EDO)</option>
+                        <option value="Álgebra Básica / Trigonometría">Álgebra Básica / Trigonometría</option>
+                        <option value="Álgebra Lineal">Álgebra Lineal</option>
+                        <option value="Estadística Descriptiva / Inferencial">Estadística Descriptiva / Inferencial</option>
+                        <option value="Física / Química General">Física / Química General</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tema-ciencias">Temas específicos del taller o parcial:</label>
+                    <input type="text" id="tema-ciencias" placeholder="Ej. Límites, derivadas, integrales por partes, matrices, transformada de Laplace...">
+                </div>
+                <div class="form-group">
+                    <label for="fecha-ciencias">Fecha y hora de entrega:</label>
+                    <input type="text" id="fecha-ciencias" placeholder="Ej. Para hoy a las 6:00 PM / Mañana...">
+                </div>
+                <button class="btn-whatsapp" onclick="enviarWhatsAppDirecto('ciencias')">📲 Enviar Taller por WhatsApp</button>
+            </div>
+        </div>
+
+        <!-- PANEL 4: TUTORÍAS Y CLASES VIRTUALES -->
+        <div id="panel-tutorias" class="tab-panel">
+            <div class="card">
+                <h2>💻 Tutorías y Clases Virtuales Personalizadas</h2>
+                <div class="form-group">
+                    <label for="materia-tutoria">Materia o área de refuerzo:</label>
+                    <select id="materia-tutoria">
+                        <option value="Cálculo 1, 2 o 3">Cálculo 1, 2 o 3</option>
+                        <option value="Ecuaciones Diferenciales (EDO)">Ecuaciones Diferenciales (EDO)</option>
+                        <option value="Álgebra / Álgebra Lineal">Álgebra / Álgebra Lineal</option>
+                        <option value="Metodología de la Investigación / Tesis">Metodología de la Investigación / Tesis</option>
+                        <option value="Bioestadística / Análisis de Datos">Bioestadística / Análisis de Datos</option>
+                        <option value="Otra asignatura universitaria">Otra asignatura universitaria</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="tema-tutoria">¿Qué temas quieres repasar o preparar?</label>
     <footer>
-        <p>© 2026 GRADUANDO - Asesoría Académica y Metodológica de Investigación.</p>
+        <p>© 2026 GRADUANDO - Expertos en Investigación Académica y Asesoría Universitaria | Todos los derechos reservados.</p>
     </footer>
 
     <script>
-        const baseConocimiento = {
+        const WHATSAPP_NUMBER = "573104714499";
+
+        function cambiarTab(tabId, element) {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.querySelectorAll('.service-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById('panel-' + tabId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        const referentesPorArea = {
             "Medicina": {
-                titulo: "Factores asociados a complicaciones clínicas y estancia hospitalaria en [ENFOQUE]: un análisis retrospectivo.",
-                pregunta: "¿Cuáles son los principales factores clínicos y sociodemográficos asociados a las complicaciones en pacientes de [ENFOQUE]?",
-                objetivo: "Determinar los factores asociados a complicaciones clínicas en pacientes atendidos en [ENFOQUE] mediante análisis de registros clínicos."
+                autores: "Hernández-Sampieri et al. (Metodología), Argimon Pallàs & Jiménez Villa (Investigación Clínica), OMS.",
+                referencia: "Argimon Pallàs, J. M., & Jiménez Villa, J. (2019). Métodos de investigación clínica y epidemiológica (5.ª ed.). Elsevier."
             },
             "Enfermería": {
-                titulo: "Adherencia a protocolos de seguridad del paciente y prevención de eventos adversos por el personal de enfermería en [ENFOQUE].",
-                pregunta: "¿Cuál es el nivel de adherencia a los protocolos de seguridad del paciente en el servicio de [ENFOQUE]?",
-                objetivo: "Evaluar el cumplimiento de los protocolos de seguridad del paciente y su relación con la prevención de eventos adversos en [ENFOQUE]."
+                autores: "Nola Pender (Promoción de la Salud), Dorothea Orem (Autocuidado), Polit & Beck (Investigación en Enfermería).",
+                referencia: "Polit, D. F., & Beck, C. T. (2018). Investigación en enfermería: Fundamentos para el uso de la evidencia (9.ª ed.). Wolters Kluwer."
             },
             "Instrumentación Quirúrgica": {
-                titulo: "Importancia de la aplicación de la Lista de Verificación de Cirugía Segura en la prevención de eventos adversos en [ENFOQUE].",
-                pregunta: "¿De qué manera influye el cumplimiento de la Lista de Verificación de Cirugía Segura en la reducción de incidentes intraoperatorios en [ENFOQUE]?",
-                objetivo: "Analizar el impacto del cumplimiento de la lista de verificación quirúrgica y el conteo de instrumental en la seguridad del paciente en [ENFOQUE]."
+                autores: "Atul Gawande (Seguridad Quirúrgica - OMS), Fuller (Instrumentación Quirúrgica), AORN.",
+                referencia: "Fuller, J. K. (2020). Instrumentación quirúrgica: Principios y práctica (7.ª ed.). Editorial Médica Panamericana."
             },
             "Fisioterapia": {
-                titulo: "Efectividad de las estrategias de rehabilitación temprana en la recuperación funcional de pacientes en [ENFOQUE].",
-                pregunta: "¿Cuál es el impacto funcional de un programa de intervención fisioterapéutica temprana en pacientes de [ENFOQUE]?",
-                objetivo: "Determinar los efectos de la intervención fisioterapéutica temprana sobre la capacidad funcional y calidad de vida en [ENFOQUE]."
+                autores: "Kisner & Colby (Ejercicio Terapéutico), Kapandji (Fisiología Articular), World Physiotherapy.",
+                referencia: "Kisner, C., & Colby, L. A. (2018). Ejercicio terapéutico: Fundamentos y técnicas (7.ª ed.). Paidotribo."
+            },
+            "Psicología Clínica y de la Salud": {
+                autores: "Aaron Beck (Terapia Cognitiva), Albert Bandura (Autoeficacia), Asociación Americana de Psicología (APA).",
+                referencia: "American Psychological Association. (2020). Publication manual of the American Psychological Association (7th ed.)."
+            },
+            "Seguridad y Salud en el Trabajo (SST)": {
+                autores: "OIT (Organización Internacional del Trabajo), Heinrich (Prevención de Accidentes), Decreto 1072 de 2015.",
+                referencia: "Organización Internacional del Trabajo [OIT]. (2021). Seguridad y salud en el trabajo: Guía metodológica para la gestión del riesgo."
+            },
+            "Ingeniería": {
+                autores: "Roberto Hernández-Sampieri, Pressman (Ingeniería), Norma Técnica Colombiana / IEEE.",
+                referencia: "Hernández-Sampieri, R., & Mendoza, C. P. (2018). Metodología de la investigación: Las rutas cuantitativa, cualitativa y mixta. McGraw-Hill."
+            },
+            "Derecho": {
+                autores: "Robert Alexy (Teoría de los Derechos), Luigi Ferrajoli (Garantismo), Corte Constitucional de Colombia.",
+                referencia: "Alexy, R. (2019). Teoría de los derechos fundamentales (2.ª ed.). Centro de Estudios Políticos y Constitucionales."
+            },
+            "Administración y Contaduría": {
+                autores: "Michael Porter (Estrategia), Idalberto Chiavenato (Gestión), NIIF.",
+                referencia: "Chiavenato, I. (2019). Introducción a la teoría general de la administración (10.ª ed.). McGraw-Hill."
+            },
+            "General": {
+                autores: "Roberto Hernández-Sampieri, Carlos Méndez Álvarez, César Augusto Bernal (Metodología de la Investigación).",
+                referencia: "Bernal, C. A. (2016). Metodología de la investigación: Administración, economía, humanidades y ciencias sociales (4.ª ed.). Pearson."
             }
         };
-
-        function generarAnteproyecto() {
+        function generarPropuesta() {
             const carrera = document.getElementById('carrera').value;
-            let enfoque = document.getElementById('enfoque').value.trim();
+            const enfoqueInput = document.getElementById('enfoque').value.trim();
             const tipoEstudio = document.getElementById('tipo-estudio').value;
 
             if (!carrera) {
-                alert("Por favor, selecciona tu carrera primero.");
+                alert("Por favor, selecciona tu Programa o Carrera primero.");
                 return;
             }
 
-            if (!enfoque) {
-                enfoque = "instituciones de salud de mediana y alta complejidad (2021-2026)";
+            const tema = enfoqueInput !== "" ? enfoqueInput : "factores asociados y calidad de atención en " + carrera;
+            let tituloSugerido = "";
+            let objetivoGeneral = "";
+
+            if (tipoEstudio.includes("Revisión")) {
+                tituloSugerido = `Evidencia científica sobre ${tema} en el ámbito de ${carrera}: Una revisión sistemática de la literatura (2020-2026)`;
+                objetivoGeneral = `Analizar la evidencia científica disponible en bases de datos indexadas sobre ${tema} desde la perspectiva de ${carrera}.`;
+            } else if (tipoEstudio.includes("Observacional")) {
+                tituloSugerido = `Caracterización clínica y epidemiológica de ${tema} en pacientes atendidos en instituciones de salud: Un estudio observacional`;
+                objetivoGeneral = `Determinar las características principales y factores asociados a ${tema} mediante el análisis de registros institucionales.`;
+            } else if (tipoEstudio.includes("Cuantitativo")) {
+                tituloSugerido = `Relación entre los factores determinantes y el impacto de ${tema} en el área de ${carrera}: Estudio cuantitativo correlacional`;
+                objetivoGeneral = `Evaluar la relación estadística entre las variables asociadas a ${tema} en la población de estudio seleccionada.`;
+            } else {
+                tituloSugerido = `Percepciones, experiencias y abordaje profesional frente a ${tema} desde la práctica de ${carrera}: Un estudio cualitativo`;
+                objetivoGeneral = `Comprender las experiencias y significados construidos en torno a ${tema} desde la perspectiva de los actores involucrados.`;
             }
 
-            let plantilla = baseConocimiento[carrera] || {
-                titulo: `Análisis de tendencias, retos y oportunidades en ${enfoque} desde el enfoque de ${carrera}.`,
-                pregunta: `¿Cuáles son los principales factores que inciden en el desarrollo de ${enfoque} dentro del campo de ${carrera}?`,
-                objetivo: `Analizar las variables clave relacionadas con ${enfoque} mediante un enfoque metodológico de ${tipoEstudio}.`
-            };
+            let refData = referentesPorArea["General"];
+            if (referentesPorArea[carrera]) {
+                refData = referentesPorArea[carrera];
+            } else if (carrera.includes("Ingeniería")) {
+                refData = referentesPorArea["Ingeniería"];
+            } else if (carrera.includes("Administración") || carrera.includes("Contaduría")) {
+                refData = referentesPorArea["Administración y Contaduría"];
+            }
 
-            const tituloFinal = plantilla.titulo.replace("[ENFOQUE]", enfoque);
-            const preguntaFinal = plantilla.pregunta.replace("[ENFOQUE]", enfoque);
-            const objetivoFinal = plantilla.objetivo.replace("[ENFOQUE]", enfoque);
-
-            const htmlResultado = `
-                <div class="propuesta-box">
-                    <h3>📌 Título Sugerido</h3>
-                    <p class="propuesta-item"><strong>${tituloFinal}</strong></p>
-                    
-                    <h3>❓ Pregunta Problema</h3>
-                    <p class="propuesta-item">${preguntaFinal}</p>
-                    
-                    <h3>🎯 Objetivo General (Taxonomía de Bloom)</h3>
-                    <p class="propuesta-item">${objetivoFinal}</p>
-                    
-                    <h3>🔬 Diseño Metodológico Sugerido</h3>
-                    <p class="propuesta-item"><strong>Enfoque:</strong> ${tipoEstudio} aplicado al área de <strong>${carrera}</strong>.</p>
-                </div>
+            const contenidoHTML = `
+                <h3>📌 Título Sugerido:</h3>
+                <p class="propuesta-item"><strong>"${tituloSugerido}"</strong></p>
+                <div class="propuesta-item"><strong>🎯 Objetivo General:</strong> ${objetivoGeneral}</div>
+                <div class="propuesta-item"><strong>🔬 Diseño Metodológico:</strong> ${tipoEstudio} | <strong>Programa:</strong> ${carrera}</div>
+                <div class="propuesta-item"><strong>📚 Autores y Teóricos Clave Sugeridos:</strong> ${refData.autores}</div>
+                <div class="propuesta-item"><strong>📖 Referencia Base (Norma APA 7):</strong> <em>${refData.referencia}</em></div>
             `;
 
-            document.getElementById('contenido-propuesta').innerHTML = htmlResultado;
+            document.getElementById('propuesta-contenido').innerHTML = contenidoHTML;
             document.getElementById('resultado-container').style.display = 'block';
+
+            const mensajeWA = `Hola GRADUANDO 🎓📚, me interesa recibir asesoría para mi proyecto de grado.\n\n*Carrera:* ${carrera}\n*Enfoque:* ${tipoEstudio}\n*Título generado:* "${tituloSugerido}"`;
+            const urlWA = `https://wa.me{WHATSAPP_NUMBER}?text=${encodeURIComponent(mensajeWA)}`;
+            
+            document.getElementById('btn-wa-tesis').href = urlWA;
             document.getElementById('resultado-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function enviarWhatsAppDirecto(servicio) {
+            let mensajeWA = "";
+
+            if (servicio === 'trabajos') {
+                const tipo = document.getElementById('tipo-trabajo').value;
+                const tema = document.getElementById('tema-trabajo').value.trim() || "No especificado";
+                const detalle = document.getElementById('detalle-trabajo').value.trim() || "Sin detalles adicionales";
+                mensajeWA = `Hola GRADUANDO 📝, necesito cotizar un trabajo académico:\n\n*Servicio:* ${tipo}\n*Tema/Materia:* ${tema}\n*Detalles:* ${detalle}`;
+            } else if (servicio === 'ciencias') {
+                const materia = document.getElementById('materia-ciencias').value;
+                const tema = document.getElementById('tema-ciencias').value.trim() || "No especificado";
+                const fecha = document.getElementById('fecha-ciencias').value.trim() || "Por definir";
+                mensajeWA = `Hola GRADUANDO 🧮, necesito ayuda con ejercicios de Ciencias Básicas:\n\n*Asignatura:* ${materia}\n*Temas:* ${tema}\n*Fecha de entrega:* ${fecha}`;
+            } else if (servicio === 'tutorias') {
+                const materia = document.getElementById('materia-tutoria').value;
+                const tema = document.getElementById('tema-tutoria').value.trim() || "Refuerzo general";
+                const horario = document.getElementById('horario-tutoria').value.trim() || "Flexible";
+                mensajeWA = `Hola GRADUANDO 💻, quiero agendar una tutoría virtual:\n\n*Materia:* ${materia}\n*Temas a repasar:* ${tema}\n*Horario preferido:* ${horario}`;
+            }
+
+            const urlWA = `https://wa.me{WHATSAPP_NUMBER}?text=${encodeURIComponent(mensajeWA)}`;
+            window.open(urlWA, '_blank');
         }
     </script>
 </body>
