@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRADUANDO | Generador de Temas y Anteproyectos de Tesis</title>
+    <style>
+        :root {
+            --primary: #0f4c81;
+            --secondary: #00a896;
+            --accent: #f4a261;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), #163a5f);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            border-top: 5px solid var(--secondary);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 0.85rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        optgroup {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .btn:hover {
+            background-color: #028090;
+        }
+
+        .btn:active {
+            transform: scale(0.99);
+        }
+
+        #resultado-container {
+            display: none;
+            border-top: 5px solid var(--primary);
+        }
+
+        .propuesta-box {
+            background-color: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .propuesta-box h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .propuesta-item {
+            margin-bottom: 0.8rem;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #fff8f1, #ffedd5);
+            border: 1px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>GRADUANDO</h1>
+        <p>Plataforma inteligente de generación de ideas de investigación y estructura de anteproyectos de grado</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>1. Configura tu Perfil Académico</h2>
+            
+            <div class="form-group">
+                <label for="carrera">Selecciona tu Programa / Carrera:</label>
+                <select id="carrera">
+                    <option value="">-- Elige tu carrera --</option>
+                    
+                    <optgroup label="🩺 Ciencias de la Salud">
+                        <option value="Medicina">Medicina</option>
+                        <option value="Enfermería">Enfermería</option>
+                        <option value="Instrumentación Quirúrgica">Instrumentación Quirúrgica</option>
+                        <option value="Fisioterapia">Fisioterapia</option>
+                        <option value="Bacteriología y Laboratorio Clínico">Bacteriología y Laboratorio Clínico</option>
+                        <option value="Odontología">Odontología</option>
+                        <option value="Nutrición y Dietética">Nutrición y Dietética</option>
+                        <option value="Fonoaudiología">Fonoaudiología</option>
+                        <option value="Terapia Respiratoria">Terapia Respiratoria</option>
+                        <option value="Regencia de Farmacia">Regencia de Farmacia</option>
+                        <option value="Psicología Clínica y de la Salud">Psicología Clínica y de la Salud</option>
+                        <option value="Seguridad y Salud en el Trabajo (SST)">Seguridad y Salud en el Trabajo (SST)</option>
+                    </optgroup>
+
+                    <optgroup label="⚙️ Ingenierías y Tecnología">
+                        <option value="Ingeniería Civil">Ingeniería Civil</option>
+                        <option value="Ingeniería de Sistemas / Software">Ingeniería de Sistemas / Software</option>
+                        <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                        <option value="Ingeniería Ambiental">Ingeniería Ambiental</option>
+                    </optgroup>
+
+                    <optgroup label="⚖️ Ciencias Sociales, Jurídicas y Administrativas">
+                        <option value="Derecho">Derecho</option>
+                        <option value="Administración de Empresas">Administración de Empresas</option>
+                        <option value="Contaduría Pública">Contaduría Pública</option>
+                        <option value="Trabajo Social">Trabajo Social</option>
+                        <option value="Educación / Licenciaturas">Educación / Licenciaturas</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="enfoque">Área de interés o población específica (Opcional):</label>
+                <input type="text" id="enfoque" placeholder="Ej. Quirófano, UCI, pacientes pediátricos, rehabilitación deportiva, gestión hospitalaria...">
+            </div>
+
+            <div class="form-group">
+                <label for="tipo-estudio">Tipo de investigación preferida:</label>
+                <select id="tipo-estudio">
+                    <option value="Revisión Sistemática / Literatura">Revisión Sistemática o de Literatura (Sin trabajo de campo)</option>
+                    <option value="Estudio Observacional / Descriptivo">Estudio Observacional / Análisis de Bases de Datos</option>
+                    <option value="Estudio Cuantitativo / Correlacional">Estudio Cuantitativo / Encuestas</option>
+                    <option value="Estudio Cualitativo">Estudio Cualitativo / Entrevistas</option>
+                </select>
+            </div>
+
+            <button class="btn" onclick="generarAnteproyecto()">Generar Idea y Estructura de Anteproyecto</button>
+        </div>
+
+        <div class="card" id="resultado-container">
+            <h2>2. Propuesta Generada por GRADUANDO</h2>
+            <div id="contenido-propuesta"></div>
+
+            <div class="cta-box">
+                <h3>¿Necesitas desarrollar este anteproyecto completo con normas APA 7 o Vancouver?</h3>
+                <p>En <strong>GRADUANDO</strong> te acompañamos desde la búsqueda de antecedentes y matriz de datos hasta el documento final listo para sustentar.</p>
+                <a href="https://wa.me" target="_blank" class="btn-whatsapp">
+                    📲 Solicitar Asesoría Personalizada por WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 GRADUANDO - Asesoría Académica y Metodológica de Investigación.</p>
+    </footer>
+
+    <script>
+        const baseConocimiento = {
+            "Medicina": {
+                titulo: "Factores asociados a complicaciones clínicas y estancia hospitalaria en [ENFOQUE]: un análisis retrospectivo.",
+                pregunta: "¿Cuáles son los principales factores clínicos y sociodemográficos asociados a las complicaciones en pacientes de [ENFOQUE]?",
+                objetivo: "Determinar los factores asociados a complicaciones clínicas en pacientes atendidos en [ENFOQUE] mediante análisis de registros clínicos."
+            },
+            "Enfermería": {
+                titulo: "Adherencia a protocolos de seguridad del paciente y prevención de eventos adversos por el personal de enfermería en [ENFOQUE].",
+                pregunta: "¿Cuál es el nivel de adherencia a los protocolos de seguridad del paciente en el servicio de [ENFOQUE]?",
+                objetivo: "Evaluar el cumplimiento de los protocolos de seguridad del paciente y su relación con la prevención de eventos adversos en [ENFOQUE]."
+            },
+            "Instrumentación Quirúrgica": {
+                titulo: "Importancia de la aplicación de la Lista de Verificación de Cirugía Segura en la prevención de eventos adversos en [ENFOQUE].",
+                pregunta: "¿De qué manera influye el cumplimiento de la Lista de Verificación de Cirugía Segura en la reducción de incidentes intraoperatorios en [ENFOQUE]?",
+                objetivo: "Analizar el impacto del cumplimiento de la lista de verificación quirúrgica y el conteo de instrumental en la seguridad del paciente en [ENFOQUE]."
+            },
+            "Fisioterapia": {
+                titulo: "Efectividad de las estrategias de rehabilitación temprana en la recuperación funcional de pacientes en [ENFOQUE].",
+                pregunta: "¿Cuál es el impacto funcional de un programa de intervención fisioterapéutica temprana en pacientes de [ENFOQUE]?",
+                objetivo: "Determinar los efectos de la intervención fisioterapéutica temprana sobre la capacidad funcional y calidad de vida en [ENFOQUE]."
+            }
+        };
+
+        function generarAnteproyecto() {
+            const carrera = document.getElementById('carrera').value;
+            let enfoque = document.getElementById('enfoque').value.trim();
+            const tipoEstudio = document.getElementById('tipo-estudio').value;
+
+            if (!carrera) {
+                alert("Por favor, selecciona tu carrera primero.");
+                return;
+            }
+
+            if (!enfoque) {
+                enfoque = "instituciones de salud de mediana y alta complejidad (2021-2026)";
+            }
+
+            let plantilla = baseConocimiento[carrera] || {
+                titulo: `Análisis de tendencias, retos y oportunidades en ${enfoque} desde el enfoque de ${carrera}.`,
+                pregunta: `¿Cuáles son los principales factores que inciden en el desarrollo de ${enfoque} dentro del campo de ${carrera}?`,
+                objetivo: `Analizar las variables clave relacionadas con ${enfoque} mediante un enfoque metodológico de ${tipoEstudio}.`
+            };
+
+            const tituloFinal = plantilla.titulo.replace("[ENFOQUE]", enfoque);
+            const preguntaFinal = plantilla.pregunta.replace("[ENFOQUE]", enfoque);
+            const objetivoFinal = plantilla.objetivo.replace("[ENFOQUE]", enfoque);
+
+            const htmlResultado = `
+                <div class="propuesta-box">
+                    <h3>📌 Título Sugerido</h3>
+                    <p class="propuesta-item"><strong>${tituloFinal}</strong></p>
+                    
+                    <h3>❓ Pregunta Problema</h3>
+                    <p class="propuesta-item">${preguntaFinal}</p>
+                    
+                    <h3>🎯 Objetivo General (Taxonomía de Bloom)</h3>
+                    <p class="propuesta-item">${objetivoFinal}</p>
+                    
+                    <h3>🔬 Diseño Metodológico Sugerido</h3>
+                    <p class="propuesta-item"><strong>Enfoque:</strong> ${tipoEstudio} aplicado al área de <strong>${carrera}</strong>.</p>
+                </div>
+            `;
+
+            document.getElementById('contenido-propuesta').innerHTML = htmlResultado;
+            document.getElementById('resultado-container').style.display = 'block';
+            document.getElementById('resultado-container').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
